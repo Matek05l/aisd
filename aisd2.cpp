@@ -1,10 +1,43 @@
-﻿//// FIFO 3.0
-//
+// FIFO 3.0
+
 //#include <iostream>
-//#include <queue>
 //#include <string>
 //
 //using namespace std;
+//
+//const int MAX_SIZE = 1002;
+//
+//struct MyQueue {
+//    int arr[MAX_SIZE];
+//    int head = 0;
+//    int tail = 0;
+//    int length = MAX_SIZE;
+//
+//    void enqueue(int x) {
+//        arr[tail] = x;
+//        if (tail == length - 1) {
+//            tail = 0;
+//        }
+//        else {
+//            tail = tail + 1;
+//        }
+//    }
+//
+//    int dequeue() {
+//        int x = arr[head];
+//        if (head == length - 1) {
+//            head = 0;
+//        }
+//        else {
+//            head = head + 1;
+//        }
+//        return x;
+//    }
+//
+//    bool isEmpty() {
+//        return head == tail;
+//    }
+//};
 //
 //int main() {
 //    ios_base::sync_with_stdio(false);
@@ -13,7 +46,7 @@
 //    int T;
 //    if (!(cin >> T)) return 0;
 //
-//    queue<int> q;
+//    MyQueue q;
 //
 //    while (T--) {
 //        string command;
@@ -22,19 +55,19 @@
 //        if (command == "ADD") {
 //            int x;
 //            cin >> x;
-//            q.push(x);
+//            q.enqueue(x);
 //        }
 //        else if (command == "DEL") {
-//            if (q.empty()) {
+//            if (q.isEmpty()) {
+//
 //                cout << "\n";
 //            }
 //            else {
-//                cout << q.front() << "\n";
-//                q.pop();
+//                cout << q.dequeue() << "\n";
 //            }
 //        }
 //        else if (command == "ISEMPTY") {
-//            if (q.empty()) {
+//            if (q.isEmpty()) {
 //                cout << "TAK\n";
 //            }
 //            else {
@@ -49,59 +82,138 @@
 
 
 //// LIFO 3.0
+//
 //#include <iostream>
-//#include <stack>
 //#include <string>
 //
-//using namespace std;
+//     using namespace std;
 //
-//int main() {
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+// const int MAX_SIZE = 1002;
 //
-//    int T;
-//    if (!(cin >> T)) return 0;
+// struct MyStack {
+//     int arr[MAX_SIZE];
+//     int top = 0;
 //
-//    stack<int> s;
+//     void push(int x) {
+//         arr[top] = x;
+//         top = top + 1;
+//     }
 //
-//    while (T--) {
-//        string command;
-//        cin >> command;
+//     int pop() {
+//         top = top - 1;
+//         return arr[top];
+//     }
 //
-//        if (command == "ADD") {
-//            int x;
-//            cin >> x;
-//            s.push(x);
-//        }
-//        else if (command == "DEL") {
-//            if (s.empty()) {
-//                cout << "\n";
-//            }
-//            else {
-//                cout << s.top() << "\n";
-//                s.pop();
-//            }
-//        }
-//        else if (command == "ISEMPTY") {
-//            if (s.empty()) {
-//                cout << "TAK\n";
-//            }
-//            else {
-//                cout << "NIE\n";
-//            }
-//        }
-//    }
+//     bool isEmpty() {
+//         return top == 0;
+//     }
+// };
 //
-//    return 0;
-//}
+// int main() {
+//     ios_base::sync_with_stdio(false);
+//     cin.tie(NULL);
+//
+//     int T;
+//     if (!(cin >> T)) return 0;
+//
+//     MyStack s;
+//
+//     while (T--) {
+//         string command;
+//         cin >> command;
+//
+//         if (command == "ADD") {
+//             int x;
+//             cin >> x;
+//             s.push(x);
+//         }
+//         else if (command == "DEL") {
+//             if (s.isEmpty()) {
+//                 cout << "\n";
+//             }
+//             else {
+//                 cout << s.pop() << "\n";
+//             }
+//         }
+//         else if (command == "ISEMPTY") {
+//             if (s.isEmpty()) {
+//                 cout << "TAK\n";
+//             }
+//             else {
+//                 cout << "NIE\n";
+//             }
+//         }
+//     }
+//
+//     return 0;
+// }
 
 //// Lista 3.5
 //#include <iostream>
-//#include <list>
 //#include <string>
-//#include <algorithm>
 //
 //using namespace std;
+//struct ListNode {
+//    int key;
+//    ListNode* prev;
+//    ListNode* next;
+//
+//    ListNode(int k, ListNode* p, ListNode* n) {
+//        key = k;
+//        prev = p;
+//        next = n;
+//    }
+//};
+//
+//
+//struct MyList {
+//    ListNode* head = nullptr;
+//    int list_size = 0;
+//
+//    ListNode* listSearch(int key) {
+//        ListNode* x = head;
+//        while (x != nullptr && x->key != key) {
+//            x = x->next;
+//        }
+//        return x;
+//    }
+//
+//
+//    void listInsert(int key) {
+//        ListNode* node = new ListNode(key, nullptr, head);
+//
+//        if (head != nullptr) {
+//            head->prev = node;
+//        }
+//        head = node;
+//        list_size++;
+//    }
+//
+//    void listDelete(ListNode* node) {
+//        if (node->prev != nullptr) {
+//            node->prev->next = node->next;
+//        }
+//        else {
+//            head = node->next;
+//        }
+//
+//        if (node->next != nullptr) {
+//            node->next->prev = node->prev;
+//        }
+//
+//        delete node;
+//        list_size--;
+//    }
+//
+//    void print() {
+//        ListNode* x = head;
+//        while (x != nullptr) {
+//            cout << x->key << " ";
+//            x = x->next;
+//        }
+//        cout << "\n";
+//    }
+//};
 //
 //int main() {
 //    ios_base::sync_with_stdio(false);
@@ -110,7 +222,7 @@
 //    int T;
 //    if (!(cin >> T)) return 0;
 //
-//    list<int> lst;
+//    MyList lst;
 //
 //    while (T--) {
 //        string command;
@@ -119,21 +231,21 @@
 //        if (command == "ADD") {
 //            int x;
 //            cin >> x;
-//            lst.push_front(x);
+//            lst.listInsert(x);
 //        }
 //        else if (command == "DEL") {
 //            int x;
 //            cin >> x;
-//            auto it = find(lst.begin(), lst.end(), x);
-//            if (it != lst.end()) {
-//                lst.erase(it); 
+//
+//            ListNode* nodeToDelete = lst.listSearch(x);
+//            if (nodeToDelete != nullptr) {
+//                lst.listDelete(nodeToDelete);
 //            }
 //        }
 //        else if (command == "FIND") {
 //            int x;
 //            cin >> x;
-//            auto it = find(lst.begin(), lst.end(), x);
-//            if (it != lst.end()) {
+//            if (lst.listSearch(x) != nullptr) {
 //                cout << "TAK\n";
 //            }
 //            else {
@@ -141,13 +253,10 @@
 //            }
 //        }
 //        else if (command == "PRINT") {
-//            for (int val : lst) {
-//                cout << val << " ";
-//            }
-//            cout << "\n";
+//            lst.print();
 //        }
 //        else if (command == "SIZE") {
-//            cout << lst.size() << "\n";
+//            cout << lst.list_size << "\n";
 //        }
 //    }
 //
